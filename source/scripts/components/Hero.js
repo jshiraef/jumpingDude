@@ -24,7 +24,7 @@ var HeroData = Phlux.createStore({
     },
     update: function(delta) {
     var hero = this.data
-    // input handling
+    // input handling blah
         if(Keyb.isDown("W") || Keyb.isDown("<up>")){
         if(hero.jumpingHeight.current < hero.jumpingHeight.maximum && hero.jumpCoolDown <= 0) {
           hero.velocity.y -= hero.acceleration.y * delta
@@ -79,8 +79,7 @@ var HeroData = Phlux.createStore({
         
         // jumpCoolDown
         if(hero.jumpCoolDown > 0){
-        hero.jumpCoolDown -= delta
-        
+        hero.jumpCoolDown -= delta 
         console.log(hero.jumpCoolDown)
         }
         
@@ -122,6 +121,7 @@ var HeroData = Phlux.createStore({
 
 Tickly.loop(function(delta) {
    HeroData.update(delta)
+ //  console.log(this.state.hero.velocity.y)
 })
 
 var Hero = React.createClass({	
@@ -129,13 +129,15 @@ var Hero = React.createClass({
         Phlux.connectStore(HeroData, "hero")
         ],
 	render: function()  {
+    var width = 1 + (this.state.hero.velocity.y * 0.75)
+    var height = 1 - (this.state.hero.velocity.y * 0.75)
     var myStyles = {
     backgroundColor: this.state.hero.color,
-    width: 1 + "em",
-    height: 1 + "em",
+    width: width + "em",
+    height: height + "em",
     position: "absolute",
-    top: this.state.hero.y + "em",
-    left: this.state.hero.x + "em"
+    top: this.state.hero.y - (height / 2) + "em",
+    left: this.state.hero.x - (width / 2) + "em"
     }
     return(
         <div style = {myStyles}>
