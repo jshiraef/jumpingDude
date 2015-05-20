@@ -7,5 +7,3 @@ window.HEIGHT = 15
 
 var Game = require("<scripts>/components/Game")
 React.render(<Game/>, document.body)
-
-
