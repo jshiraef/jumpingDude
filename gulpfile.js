@@ -2,6 +2,7 @@ var gulp = require("gulp")
 var gulp_if = require("gulp-if")
 var gulp_util = require("gulp-util")
 var gulp_sass = require("gulp-sass")
+var gulp_jscs = require("gulp-jscs")
 var gulp_uglify = require("gulp-uglify")
 var gulp_connect = require("gulp-connect")
 var gulp_minify_css = require("gulp-minify-css")
@@ -126,6 +127,11 @@ gulp.task("server", function() {
         port: 8080
     })
     opn("http://localhost:8080")
+})
+
+gulp.task("lint", function() {
+    gulp.src("./source/**/*.js")
+        .pipe(gulp_jscs("./.jscsrc"))
 })
 
 process.on("uncaughtException", function (error) {
